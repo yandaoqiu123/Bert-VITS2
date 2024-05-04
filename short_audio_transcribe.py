@@ -42,7 +42,7 @@ def transcribe_one(audio_path):
     return lang, result.text
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--languages", default="CJE")
+    parser.add_argument("--languages", default="CJ")
     parser.add_argument("--whisper_size", default="medium")
     args = parser.parse_args()
     if args.languages == "CJE":
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     model = whisper.load_model(args.whisper_size)
     #parent_dir = "./custom_character_voice/"
     parent_dir=config.resample_config.in_dir
-    parent_dir = parent_dir.replace("/audios","")
+    parent_dir = parent_dir.replace("\\audios","")
     print(parent_dir)
     speaker = model_name
     speaker_annos = []
@@ -98,7 +98,7 @@ if __name__ == "__main__":
                 print(f"{lang} not supported, ignoring\n")
                 continue
             #text = "ZH|" + text + "\n"
-            text = f"./Data/{model_name}/wavs/{wavfile}|" + f"{model_name}|" +lang2token[lang] + text + "\n"
+            text = f"./Data\{model_name}\wavs\{wavfile}|" + f"{model_name}|" +lang2token[lang] + text + "\n"
             speaker_annos.append(text)
             
             processed_files += 1
